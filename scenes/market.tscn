@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmkwm8nboect"]
+
+[ext_resource type="Script" uid="uid://b3tpdvbt3wqde" path="res://scripts/market.gd" id="1_k70a0"]
+[ext_resource type="Script" uid="uid://ce6t5af163epu" path="res://scripts/farmer.gd" id="2_7bpo7"]
+[ext_resource type="Script" uid="uid://dtk5dje4em2re" path="res://scenes/monkey.gd" id="3_k70a0"]
+
+[node name="market" type="Node2D"]
+script = ExtResource("1_k70a0")
+
+[node name="farmer" type="Node2D" parent="."]
+script = ExtResource("2_7bpo7")
+
+[node name="time_to_sell" type="Timer" parent="farmer"]
+autostart = true
+
+[node name="monkey" type="Node2D" parent="."]
+script = ExtResource("3_k70a0")
+
+[node name="time_to_buy" type="Timer" parent="monkey"]
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="timeout" from="farmer/time_to_sell" to="farmer" method="_on_time_to_sell_timeout"]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://bup1ip3aaogx7"]
+
+[ext_resource type="Script" uid="uid://cvyf0amne57s4" path="res://scenes/banana.gd" id="1_a45fu"]
+[ext_resource type="Texture2D" uid="uid://dhf5a44vel1al" path="res://assets/icon.svg" id="1_hilkf"]
+
+[sub_resource type="Animation" id="Animation_36b2i"]
+resource_name = "expire"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.733333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.13725491)]
+}
+
+[sub_resource type="Animation" id="Animation_6bkyw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_srj6n"]
+_data = {
+&"RESET": SubResource("Animation_6bkyw"),
+&"expire": SubResource("Animation_36b2i")
+}
+
+[node name="banana" type="Node2D"]
+script = ExtResource("1_a45fu")
+
+[node name="expiration_date" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -5)
+texture = ExtResource("1_hilkf")
+
+[node name="expiration" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_srj6n")
+}
+
+[connection signal="timeout" from="expiration_date" to="." method="_on_expiration_date_timeout"]
