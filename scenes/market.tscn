@@ -1,24 +1,31 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmkwm8nboect"]
 
 [ext_resource type="Script" uid="uid://b3tpdvbt3wqde" path="res://scripts/market.gd" id="1_k70a0"]
-[ext_resource type="Script" uid="uid://ce6t5af163epu" path="res://scripts/farmer.gd" id="2_7bpo7"]
-[ext_resource type="Script" uid="uid://dtk5dje4em2re" path="res://scenes/monkey.gd" id="3_k70a0"]
+[ext_resource type="PackedScene" uid="uid://bv3evyx0sotku" path="res://scenes/farmer.tscn" id="2_k70a0"]
+[ext_resource type="PackedScene" uid="uid://b2u2lkt7q0so4" path="res://scenes/monkey.tscn" id="3_7bpo7"]
 
 [node name="market" type="Node2D"]
 script = ExtResource("1_k70a0")
 
-[node name="farmer" type="Node2D" parent="."]
-script = ExtResource("2_7bpo7")
+[node name="farmer" parent="." instance=ExtResource("2_k70a0")]
 
-[node name="time_to_sell" type="Timer" parent="farmer"]
-autostart = true
+[node name="farmer2" parent="." instance=ExtResource("2_k70a0")]
 
-[node name="monkey" type="Node2D" parent="."]
-script = ExtResource("3_k70a0")
+[node name="farmer3" parent="." instance=ExtResource("2_k70a0")]
 
-[node name="time_to_buy" type="Timer" parent="monkey"]
+[node name="monkey" parent="." instance=ExtResource("3_7bpo7")]
+
+[node name="monkey2" parent="." instance=ExtResource("3_7bpo7")]
+
+[node name="monkey3" parent="." instance=ExtResource("3_7bpo7")]
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="Ledger" type="RichTextLabel" parent="."]
+offset_left = 141.0
+offset_top = 113.0
+offset_right = 563.0
+offset_bottom = 498.0
+
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="timeout" from="farmer/time_to_sell" to="farmer" method="_on_time_to_sell_timeout"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

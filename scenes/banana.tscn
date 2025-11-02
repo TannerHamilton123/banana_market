@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bup1ip3aaogx7"]
 
-[ext_resource type="Script" uid="uid://cvyf0amne57s4" path="res://scenes/banana.gd" id="1_a45fu"]
+[ext_resource type="Script" uid="uid://cvyf0amne57s4" path="res://scripts/banana.gd" id="1_a45fu"]
 [ext_resource type="Texture2D" uid="uid://dhf5a44vel1al" path="res://assets/icon.svg" id="1_hilkf"]
 
 [sub_resource type="Animation" id="Animation_36b2i"]

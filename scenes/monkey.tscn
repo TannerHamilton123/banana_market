@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2u2lkt7q0so4"]
+
+[ext_resource type="Script" uid="uid://dtk5dje4em2re" path="res://scripts/monkey.gd" id="1_rb1f4"]
+
+[node name="monkey" type="Node2D"]
+script = ExtResource("1_rb1f4")
+
+[node name="time_to_buy" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="time_to_buy" to="." method="_on_time_to_buy_timeout"]
