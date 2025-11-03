@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bv3evyx0sotku"]
+[gd_scene load_steps=3 format=3 uid="uid://bv3evyx0sotku"]
 
 [ext_resource type="Script" uid="uid://ce6t5af163epu" path="res://scripts/farmer.gd" id="1_vltvv"]
+[ext_resource type="Texture2D" uid="uid://vxxgbs2dou6r" path="res://assets/farmer.png" id="2_2qlof"]
 
-[node name="farmer" type="Node2D"]
+[node name="farmer" type="Node2D" groups=["farmer"]]
 script = ExtResource("1_vltvv")
 
 [node name="time_to_sell" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2qlof")
 
 [connection signal="timeout" from="time_to_sell" to="." method="_on_time_to_sell_timeout"]
