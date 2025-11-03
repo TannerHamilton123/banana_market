@@ -5,9 +5,9 @@ var label_scene = preload("res://scenes/leave_label.tscn")
 var test_scene = preload("res://scenes/test.tscn")
 var farmer_scene = preload("res://scenes/farmer.tscn")
 var monkey_scene = preload("res://scenes/monkey.tscn")
-var n_farmers = 5
-var n_monkeys = 5
-
+@export var n_farmers = 50
+@export var n_monkeys = 50
+var time = 0 
 var quantity_analysis : int = 0
 var price_analysis : float = 0
 
@@ -19,6 +19,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	time += delta
+	time = Global.round_to_cent(time)
+	$time_label.text = str(time)
 	if produce.size() > 0:
 		ledger_text = ""
 		for banana in produce:
@@ -37,7 +40,6 @@ func add_banana(banana:Node2D):
 	var index = Global.binary_search(price,produce)
 	produce.insert(index,[b_name,price])
 	banana.position = banana.seller.position + Vector2(0,10)
-	print(banana.seller.position)
 	#banana.position.x = randf_range(100,1100)
 	#banana.position.y = randf_range(100,700)
 	
@@ -56,6 +58,8 @@ func _on_child_exiting_tree(node: Node) -> void:
 		if node.sold == true:
 			farmer.sold = true
 			add_label(node,"sold")
+			price_analysis += node.price
+			quantity_analysis += 1
 		else:
 			node.seller.sold = false
 			add_label(node,"expired")
@@ -70,20 +74,41 @@ func add_label(banana: Node2D,text: String) :
 	
 	
 func pop_market():
+	var row = 0
 	for i in n_farmers:
+		var col = i % 30
+
+		if col == 0:
+			row += 1
 		var farmer = farmer_scene.instantiate()
 		add_child(farmer)
-		farmer.position = $farmer_square.position + Vector2(i * 50 + 15,15)
+		farmer.position = $farmer_square.position + Vector2(30 * col + 10,30 * row)
+	row = 0
 	for i in n_monkeys:
+		var col = i % 30
+
+		if col == 0:
+			row += 1
 		var monkey = monkey_scene.instantiate()
 		add_child(monkey)
-		monkey.position = $monkey_square.position + Vector2(i * 50 + 15,15)
+		monkey.position = $monkey_square.position + Vector2(30 * col + 10,30 * row)
 
 
 func analysis():
-	var x =quantity_analysis
-	var y = -price_analysis
-	var graph_origin = Vector2(650,800)
+	var x = quantity_analysis
+	var y = - (price_analysis / quantity_analysis)
+	print(x," , ",y)
+	var graph_origin = Vector2(650,460)
 	var point = Sprite2D.new()
-	point.texture = "res://assets/point.png"
+	add_child(point)
+	point.texture = load("res://assets/point_white.png")
 	point.position = graph_origin + Vector2(x,y)
+	point.set_scale(Vector2(0.5,0.5))
+	print("in the past 5 seconds, \n",quantity_analysis," bananas were sold for an average price of $\n",-y)
+	quantity_analysis = 0
+	price_analysis = 0
+
+
+func _on_market_analysis_timeout() -> void:
+	analysis()
+	pass # Replace with function body.

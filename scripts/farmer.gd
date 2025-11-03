@@ -5,7 +5,7 @@ var sold : bool = false
 var sell : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$time_to_sell.set_wait_time(randf_range(2,5))
+	$time_to_sell.set_wait_time(randf_range(1,2))
 	pass # Replace with function body.
 
 func determine_price():

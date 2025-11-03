@@ -25,6 +25,3 @@ func binary_search(price : float ,produce: Array):
 		else:
 			left = mid + 1
 	return left
-	
-#func update_listings(banana,price):
-	

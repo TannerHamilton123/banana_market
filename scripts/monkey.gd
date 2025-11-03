@@ -6,7 +6,7 @@ var index
 var banana_name
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$time_to_buy.set_wait_time(randf_range(2,5))
+	$time_to_buy.set_wait_time(randf_range(1,2))
 	pass # Replace with function body.
 
 
@@ -38,5 +38,5 @@ func buy_banana():
 	var banana_node = Global.market.get_node(banana_name)
 	banana_node.sold = true
 	Global.market.produce.pop_front()
-	print("bought ", banana_name)
+
 	banana_node.queue_free()
