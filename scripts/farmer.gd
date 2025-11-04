@@ -5,7 +5,7 @@ var sold : bool = false
 var sell : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Global.market.connect("banana_sold","banana_to_market
+	Global.market.connect("banana_sold","banana_to_market")
 	$time_to_sell.set_wait_time(randf_range(1,2))
 	pass # Replace with function body.
 
