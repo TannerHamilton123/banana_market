@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmkwm8nboect"]
+[gd_scene load_steps=3 format=3 uid="uid://bmkwm8nboect"]
 
 [ext_resource type="Script" uid="uid://b3tpdvbt3wqde" path="res://scripts/market.gd" id="1_k70a0"]
+[ext_resource type="Script" uid="uid://daor3sn5uixg0" path="res://addons/god_plot/tools/graphs/graph_2d.gd" id="2_iks0y"]
 
 [node name="market" type="Node"]
 script = ExtResource("1_k70a0")
+n_farmers = 10
+n_monkeys = 10
+starting_price = 90
 
 [node name="banana_spawning" type="ColorRect" parent="."]
 offset_left = 50.0
@@ -71,7 +75,7 @@ grow_horizontal = 2
 text = "CURRENT MARKET"
 
 [node name="Market_Analysis" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [node name="farmer_square" type="ColorRect" parent="."]
@@ -96,6 +100,30 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="graph_2d" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 620.0
+offset_top = 60.0
+offset_right = -40.0
+offset_bottom = -333.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("2_iks0y")
+x_max = 1.0
+y_max = 100.0
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="timeout" from="Market_Analysis" to="." method="_on_market_analysis_timeout"]

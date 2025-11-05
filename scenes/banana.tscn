@@ -44,7 +44,7 @@ _data = {
 script = ExtResource("1_a45fu")
 
 [node name="expiration_date" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

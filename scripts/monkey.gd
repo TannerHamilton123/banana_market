@@ -6,7 +6,7 @@ var index
 var banana_name
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$time_to_buy.set_wait_time(randf_range(1,2))
+	$time_to_buy.set_wait_time(randf_range(0.5,1))
 	pass # Replace with function body.
 
 

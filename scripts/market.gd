@@ -1,3 +1,4 @@
+
 extends Node
 var produce : Array = []
 var ledger_text = ""
@@ -7,6 +8,7 @@ var farmer_scene = preload("res://scenes/farmer.tscn")
 var monkey_scene = preload("res://scenes/monkey.tscn")
 @export var n_farmers = 50
 @export var n_monkeys = 50
+@export var starting_price = 10
 var time = 0 
 var quantity_analysis : int = 0
 var price_analysis : float = 0
@@ -82,7 +84,7 @@ func pop_market():
 			row += 1
 		var farmer = farmer_scene.instantiate()
 		add_child(farmer)
-		farmer.position = $farmer_square.position + Vector2(30 * col + 10,30 * row)
+		farmer.position = $farmer_square.position + Vector2(100 * col + 50,30 * row)
 	row = 0
 	for i in n_monkeys:
 		var col = i % 30
@@ -95,20 +97,27 @@ func pop_market():
 
 
 func analysis():
-	var x = quantity_analysis
-	var y = - (price_analysis / quantity_analysis)
-	print(x," , ",y)
-	var graph_origin = Vector2(650,460)
-	var point = Sprite2D.new()
-	add_child(point)
-	point.texture = load("res://assets/point_white.png")
-	point.position = graph_origin + Vector2(x,y)
-	point.set_scale(Vector2(0.5,0.5))
-	print("in the past 5 seconds, \n",quantity_analysis," bananas were sold for an average price of $\n",-y)
+	var x : float = quantity_analysis / float(n_farmers)
+	var y : float =  (price_analysis / quantity_analysis)
+	#print(x," , ",y)
+	#var graph_origin = Vector2(650,460)
+	#var point = Sprite2D.new()
+	#add_child(point)
+	#point.texture = load("res://assets/point_white.png")
+	#point.position = graph_origin + Vector2(x,y)
+	#point.set_scale(Vector2(0.5,0.5))
+	#print("in the past 5 seconds, \n",quantity_analysis," bananas were sold for an average price of $\n",-y)
+
+	var scatter_series = ScatterSeries.new(Color.RED, 5.0, ScatterSeries.SHAPE.CIRCLE)
+	scatter_series.add_point(x,y)
+	$graph_2d.add_series(scatter_series)
 	quantity_analysis = 0
 	price_analysis = 0
+	
 
 
 func _on_market_analysis_timeout() -> void:
 	analysis()
 	pass # Replace with function body.
+	
+	
