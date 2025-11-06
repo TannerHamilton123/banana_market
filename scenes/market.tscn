@@ -149,10 +149,14 @@ y_max = 100.0
 horizontal_title = "BANANAS PER FARMER SOLD"
 vertical_title = "AVERAGE PRICE"
 
-[node name="Label" type="Label" parent="graph_2d"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="graph_2d"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -64.0
+offset_top = 192.0
+offset_right = -24.0
+offset_bottom = 232.0
+edit_alpha = false
+edit_intensity = false
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -213,10 +217,11 @@ offset_left = 504.0
 offset_top = 280.0
 offset_right = 528.0
 offset_bottom = 448.0
+min_value = 0.5
 max_value = 10.0
 step = 0.5
 value = 5.0
-tick_count = 5
+tick_count = 10
 
 [node name="expiration_date" type="Label" parent="UI/expiration"]
 layout_mode = 0
@@ -226,11 +231,24 @@ offset_right = 76.0
 offset_bottom = -1.0
 horizontal_alignment = 1
 
+[node name="pause" type="Button" parent="UI"]
+process_mode = 3
+layout_mode = 0
+offset_left = 416.0
+offset_top = 64.0
+offset_right = 592.0
+offset_bottom = 144.0
+toggle_mode = true
+text = "PAUSE"
+
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="timeout" from="Market_Analysis" to="." method="_on_market_analysis_timeout"]
+[connection signal="color_changed" from="graph_2d/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="pressed" from="UI/add_farmer" to="." method="_on_add_farmer_pressed"]
 [connection signal="pressed" from="UI/subtract_farmer" to="." method="_on_subtract_farmer_pressed"]
 [connection signal="pressed" from="UI/add_monkey" to="." method="_on_add_monkey_pressed"]
 [connection signal="pressed" from="UI/clear_graph" to="." method="_on_clear_graph_pressed"]
 [connection signal="drag_ended" from="UI/expiration" to="." method="_on_v_slider_drag_ended"]
 [connection signal="value_changed" from="UI/expiration" to="." method="_on_expiration_value_changed"]
+[connection signal="pressed" from="UI/pause" to="." method="_on_pause_pressed"]
+[connection signal="toggled" from="UI/pause" to="." method="_on_pause_toggled"]

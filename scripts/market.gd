@@ -14,6 +14,7 @@ var time = 0
 var quantity_analysis : int = 0
 var price_analysis : float = 0
 var scatter_series = ScatterSeries.new(Color.RED, 5.0, ScatterSeries.SHAPE.CIRCLE)
+var scatter_array = [scatter_series]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,9 +46,9 @@ func remove_banana(banana):
 func analysis():
 	var x : float = quantity_analysis / float(n_farmers)
 	var y : float =  (price_analysis / quantity_analysis)
-	scatter_series.add_point(x,y)
+	scatter_array[-1].add_point(x,y)
 	
-	$graph_2d.add_series(scatter_series)
+	$graph_2d.add_series(scatter_array[-1])
 	quantity_analysis = 0
 	price_analysis = 0
 	
@@ -67,7 +68,6 @@ func _on_add_farmer_pressed() -> void:
 	$farmer_square.add_child(farmer)
 	farmer.name = str("farmer",n_farmers)
 	farmer.position = $farmer_square/farmer.position + Vector2(60 * (n_farmers-1),0)
-	print(n_farmers)
 
 
 func _on_subtract_farmer_pressed() -> void:
@@ -80,7 +80,7 @@ func _on_subtract_farmer_pressed() -> void:
 	removed.queue_free()
 	n_farmers -= 1
 
-
+	print($expiration_date.get_wait_time())
 func _on_add_monkey_pressed() -> void:
 	if n_monkeys >= 20:
 		return
@@ -89,15 +89,26 @@ func _on_add_monkey_pressed() -> void:
 	$monkey_square.add_child(monkey)
 	monkey.name = str("monkey",n_monkeys)
 	monkey.position = $monkey_square/monkey.position + Vector2(60 * (n_monkeys-1),0)
-	print(n_farmers)
+
 
 
 func _on_clear_graph_pressed() -> void:
-	scatter_series.clear_data()
+	for series in scatter_array:
+		series.clear_data()
 	pass # Replace with function body.
 
 
 func _on_expiration_value_changed(value: float) -> void:
 	Global.expiration_time = value
 	$UI/expiration/expiration_date.text= str("expiration date\n" + str(value) + "sec")
+	pass # Replace with function body.
+
+
+func _on_pause_toggled(toggled_on: bool) -> void:
+	get_tree().paused = toggled_on
+
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	var scatter_series_new = ScatterSeries.new(color, 5.0, ScatterSeries.SHAPE.CIRCLE)
+	scatter_array.append(scatter_series_new)
 	pass # Replace with function body.

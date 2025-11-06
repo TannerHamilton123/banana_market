@@ -52,6 +52,7 @@ func banana_to_market(banana_price):
 	var b_name = str("Banana_",Global.ID)
 	banana.name = b_name
 	banana.position =Vector2(0,10)
+	
 	var index = Global.binary_search(price,Global.market.produce)
 	Global.market.produce.insert(index,[b_name,price,banana.get_path()])
 	
