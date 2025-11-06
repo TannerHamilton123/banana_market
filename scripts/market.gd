@@ -13,10 +13,11 @@ var starting_price = 10
 var time = 0 
 var quantity_analysis : int = 0
 var price_analysis : float = 0
+var scatter_series = ScatterSeries.new(Color.RED, 5.0, ScatterSeries.SHAPE.CIRCLE)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#pop_market()
+	$UI/expiration/expiration_date.text= str("expiration date\n" + str(Global.expiration_time) + " seconds")
 	pass # Replace with function body.
 
 
@@ -44,8 +45,8 @@ func remove_banana(banana):
 func analysis():
 	var x : float = quantity_analysis / float(n_farmers)
 	var y : float =  (price_analysis / quantity_analysis)
-	var scatter_series = ScatterSeries.new(Color.RED, 5.0, ScatterSeries.SHAPE.CIRCLE)
 	scatter_series.add_point(x,y)
+	
 	$graph_2d.add_series(scatter_series)
 	quantity_analysis = 0
 	price_analysis = 0
@@ -92,4 +93,11 @@ func _on_add_monkey_pressed() -> void:
 
 
 func _on_clear_graph_pressed() -> void:
+	scatter_series.clear_data()
+	pass # Replace with function body.
+
+
+func _on_expiration_value_changed(value: float) -> void:
+	Global.expiration_time = value
+	$UI/expiration/expiration_date.text= str("expiration date\n" + str(value) + "sec")
 	pass # Replace with function body.

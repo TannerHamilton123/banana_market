@@ -7,12 +7,10 @@ var will_sell : bool = false
 var willing_to_sell: float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#Global.market.connect("banana_sold","banana_to_market")
-	$time_to_sell.set_wait_time(randf_range(1,2))
-	pass # Replace with function body.
-
-func _process(delta: float) -> void:
-	pass
+	$selling.text = "closed"
+	$price.text = str("$",price)
+	$willingness.text = str(floor(willing_to_sell) , "%")
+	$time_to_sell.set_wait_time(randf_range(.5,1))
 
 func _on_time_to_sell_timeout() -> void:
 	determine_price()

@@ -8,7 +8,8 @@ var banana_path
 var willing_to_buy : int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$time_to_buy.set_wait_time(randf_range(0.5,1))
+	$willingness.text = str(willing_to_buy , "%")
+	$time_to_buy.set_wait_time(randf_range(.5,1))
 	pass # Replace with function body.
 
 
@@ -44,6 +45,6 @@ func buy_banana():
 	
 	banana_node.sold = true
 	Global.market.produce.pop_front()
-	banana_node.banana_sold.emit()
+	#banana_node.banana_sold.emit()
 
 	banana_node.queue_free()

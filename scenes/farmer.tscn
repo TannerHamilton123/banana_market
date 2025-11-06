@@ -7,33 +7,38 @@
 script = ExtResource("1_vltvv")
 
 [node name="time_to_sell" type="Timer" parent="."]
-wait_time = 2.0
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_2qlof")
 
 [node name="price" type="Label" parent="."]
-offset_left = -19.0
-offset_top = 18.0
-offset_right = 21.0
-offset_bottom = 41.0
+offset_left = -20.0
+offset_top = 16.0
+offset_right = 20.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
 text = "price"
 horizontal_alignment = 1
 
 [node name="selling" type="Label" parent="."]
-offset_left = -19.0
-offset_top = 40.0
-offset_right = 21.0
-offset_bottom = 63.0
+offset_left = -24.0
+offset_top = 38.0
+offset_right = 26.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
 text = "selling"
 horizontal_alignment = 1
 
 [node name="willingness" type="Label" parent="."]
-offset_left = -20.0
-offset_top = 64.0
-offset_right = 31.0
-offset_bottom = 87.0
+offset_left = -25.0
+offset_top = 62.0
+offset_right = 26.0
+offset_bottom = 85.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
 text = "willing"
 horizontal_alignment = 1
 

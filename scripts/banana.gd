@@ -4,26 +4,24 @@ var current_name : String
 var price : float
 var seller
 var sold = false
-signal banana_sold
-signal banana_expired
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$expiration.play("expire")
-	current_name = self.name
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$expiration_date.set_wait_time(Global.expiration_time)
 
 func _on_expiration_date_timeout() -> void:
+	print($expiration_date.get_wait_time())
 	Global.market.remove_banana(self)
 	seller.sold = false
-	banana_expired.emit()
+
 
 
 func _on_tree_exiting() -> void:
 	if sold:
-		banana_sold.emit()
-	pass # Replace with function body.
+		Global.market.quantity_analysis += 1
+		Global.market.price_analysis += price

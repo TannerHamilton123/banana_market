@@ -13,22 +13,73 @@ offset_right = 1200.0
 offset_bottom = 800.0
 color = Color(0.1272713, 0.29087952, 0.24728927, 1)
 
+[node name="willingness2" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = -141.0
+offset_top = 63.0
+offset_right = -56.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
+text = "willingness"
+horizontal_alignment = 1
+
 [node name="farmer_square" type="ColorRect" parent="."]
-offset_left = 50.0
+offset_left = 139.0
 offset_top = 544.0
 offset_right = 1152.0
-offset_bottom = 616.0
-color = Color(1, 1, 1, 0.49803922)
+offset_bottom = 664.0
+color = Color(0, 0, 0, 0.7019608)
 
 [node name="farmer" parent="farmer_square" instance=ExtResource("4_d6tgm")]
 position = Vector2(50, 25)
 
+[node name="price2" type="Label" parent="farmer_square/farmer"]
+offset_left = -120.0
+offset_top = 16.0
+offset_right = -80.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
+text = "price"
+horizontal_alignment = 1
+
+[node name="selling2" type="Label" parent="farmer_square/farmer"]
+offset_left = -124.0
+offset_top = 38.0
+offset_right = -74.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
+text = "selling"
+horizontal_alignment = 1
+
+[node name="willingness2" type="Label" parent="farmer_square/farmer"]
+offset_left = -141.0
+offset_top = 63.0
+offset_right = -56.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
+text = "willingness"
+horizontal_alignment = 1
+
+[node name="willingness3" type="Label" parent="farmer_square/farmer"]
+offset_left = -141.0
+offset_top = 191.0
+offset_right = -56.0
+offset_bottom = 214.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
+text = "willingness"
+horizontal_alignment = 1
+
 [node name="monkey_square" type="ColorRect" parent="."]
-offset_left = 50.0
-offset_top = 664.0
+offset_left = 139.0
+offset_top = 680.0
 offset_right = 1152.0
-offset_bottom = 744.0
-color = Color(1, 1, 1, 0.49803922)
+offset_bottom = 800.0
+color = Color(0, 0, 0, 0.7019608)
 
 [node name="monkey" parent="monkey_square" instance=ExtResource("3_7bpo7")]
 position = Vector2(41, 34)
@@ -36,7 +87,7 @@ position = Vector2(41, 34)
 [node name="banana_spawning" type="ColorRect" parent="."]
 offset_left = 50.0
 offset_top = 60.0
-offset_right = 550.0
+offset_right = 368.0
 offset_bottom = 460.0
 color = Color(0, 0, 0, 1)
 
@@ -77,6 +128,8 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+autowrap_trim_flags = 0
+justification_flags = 0
 
 [node name="graph_2d" type="Control" parent="."]
 layout_mode = 3
@@ -93,6 +146,13 @@ size_flags_horizontal = 3
 script = ExtResource("2_iks0y")
 x_max = 1.0
 y_max = 100.0
+horizontal_title = "BANANAS PER FARMER SOLD"
+vertical_title = "AVERAGE PRICE"
+
+[node name="Label" type="Label" parent="graph_2d"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -102,31 +162,42 @@ offset_bottom = 40.0
 
 [node name="add_farmer" type="Button" parent="UI"]
 layout_mode = 0
-offset_left = 1088.0
-offset_top = 552.0
+offset_left = 1064.0
+offset_top = 568.0
 offset_right = 1144.0
-offset_bottom = 608.0
+offset_bottom = 624.0
+text = "ADD FARMER"
+autowrap_mode = 2
+autowrap_trim_flags = 192
 
 [node name="subtract_farmer" type="Button" parent="UI"]
 layout_mode = 0
-offset_left = 1024.0
-offset_top = 552.0
-offset_right = 1080.0
-offset_bottom = 608.0
+offset_left = 976.0
+offset_top = 568.0
+offset_right = 1056.0
+offset_bottom = 624.0
+text = "REMOVE FARMER"
+autowrap_mode = 2
+autowrap_trim_flags = 192
 
 [node name="add_monkey" type="Button" parent="UI"]
 layout_mode = 0
-offset_left = 1088.0
-offset_top = 672.0
-offset_right = 1144.0
-offset_bottom = 728.0
+offset_left = 1064.0
+offset_top = 704.0
+offset_right = 1142.0
+offset_bottom = 760.0
+text = "ADD MONKEY"
+autowrap_mode = 2
+autowrap_trim_flags = 192
 
 [node name="subtract_monkey" type="Button" parent="UI"]
 layout_mode = 0
-offset_left = 1024.0
-offset_top = 672.0
-offset_right = 1080.0
-offset_bottom = 728.0
+offset_left = 976.0
+offset_top = 704.0
+offset_right = 1056.0
+offset_bottom = 760.0
+text = "REMOVE MONKEY"
+autowrap_mode = 2
 
 [node name="clear_graph" type="Button" parent="UI"]
 layout_mode = 0
@@ -136,9 +207,30 @@ offset_right = 704.0
 offset_bottom = 536.0
 text = "CLEAR GRAPH"
 
+[node name="expiration" type="VSlider" parent="UI"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 280.0
+offset_right = 528.0
+offset_bottom = 448.0
+max_value = 10.0
+step = 0.5
+value = 5.0
+tick_count = 5
+
+[node name="expiration_date" type="Label" parent="UI/expiration"]
+layout_mode = 0
+offset_left = -48.0
+offset_top = -64.0
+offset_right = 76.0
+offset_bottom = -1.0
+horizontal_alignment = 1
+
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="timeout" from="Market_Analysis" to="." method="_on_market_analysis_timeout"]
 [connection signal="pressed" from="UI/add_farmer" to="." method="_on_add_farmer_pressed"]
 [connection signal="pressed" from="UI/subtract_farmer" to="." method="_on_subtract_farmer_pressed"]
 [connection signal="pressed" from="UI/add_monkey" to="." method="_on_add_monkey_pressed"]
 [connection signal="pressed" from="UI/clear_graph" to="." method="_on_clear_graph_pressed"]
+[connection signal="drag_ended" from="UI/expiration" to="." method="_on_v_slider_drag_ended"]
+[connection signal="value_changed" from="UI/expiration" to="." method="_on_expiration_value_changed"]
