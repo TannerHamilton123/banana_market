@@ -93,7 +93,7 @@ func pop_market():
 			row += 1
 		var monkey = monkey_scene.instantiate()
 		add_child(monkey)
-		monkey.position = $monkey_square.position + Vector2(30 * col + 10,30 * row)
+		monkey.position = $monkey_square.position + Vector2(100 * col + 50,30 * row)
 
 
 func analysis():

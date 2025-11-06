@@ -5,8 +5,8 @@
 
 [node name="market" type="Node"]
 script = ExtResource("1_k70a0")
-n_farmers = 10
-n_monkeys = 10
+n_farmers = 5
+n_monkeys = 5
 starting_price = 90
 
 [node name="banana_spawning" type="ColorRect" parent="."]
