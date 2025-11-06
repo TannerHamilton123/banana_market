@@ -18,7 +18,7 @@ offset_left = -19.0
 offset_top = 18.0
 offset_right = 21.0
 offset_bottom = 41.0
-text = "text"
+text = "price"
 horizontal_alignment = 1
 
 [node name="selling" type="Label" parent="."]
@@ -26,13 +26,16 @@ offset_left = -19.0
 offset_top = 40.0
 offset_right = 21.0
 offset_bottom = 63.0
+text = "selling"
 horizontal_alignment = 1
 
 [node name="willingness" type="Label" parent="."]
-offset_left = -19.0
-offset_top = 40.0
-offset_right = 21.0
-offset_bottom = 63.0
+offset_left = -20.0
+offset_top = 64.0
+offset_right = 31.0
+offset_bottom = 87.0
+text = "willing"
 horizontal_alignment = 1
 
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="timeout" from="time_to_sell" to="." method="_on_time_to_sell_timeout"]

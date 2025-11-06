@@ -1,13 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmkwm8nboect"]
+[gd_scene load_steps=5 format=3 uid="uid://bmkwm8nboect"]
 
 [ext_resource type="Script" uid="uid://b3tpdvbt3wqde" path="res://scripts/market.gd" id="1_k70a0"]
 [ext_resource type="Script" uid="uid://daor3sn5uixg0" path="res://addons/god_plot/tools/graphs/graph_2d.gd" id="2_iks0y"]
+[ext_resource type="PackedScene" uid="uid://b2u2lkt7q0so4" path="res://scenes/monkey.tscn" id="3_7bpo7"]
+[ext_resource type="PackedScene" uid="uid://bv3evyx0sotku" path="res://scenes/farmer.tscn" id="4_d6tgm"]
 
 [node name="market" type="Node"]
 script = ExtResource("1_k70a0")
-n_farmers = 5
-n_monkeys = 5
-starting_price = 90
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1200.0
+offset_bottom = 800.0
+color = Color(0.1272713, 0.29087952, 0.24728927, 1)
+
+[node name="farmer_square" type="ColorRect" parent="."]
+offset_left = 50.0
+offset_top = 544.0
+offset_right = 1152.0
+offset_bottom = 616.0
+color = Color(1, 1, 1, 0.49803922)
+
+[node name="farmer" parent="farmer_square" instance=ExtResource("4_d6tgm")]
+position = Vector2(50, 25)
+
+[node name="monkey_square" type="ColorRect" parent="."]
+offset_left = 50.0
+offset_top = 664.0
+offset_right = 1152.0
+offset_bottom = 744.0
+color = Color(1, 1, 1, 0.49803922)
+
+[node name="monkey" parent="monkey_square" instance=ExtResource("3_7bpo7")]
+position = Vector2(41, 34)
 
 [node name="banana_spawning" type="ColorRect" parent="."]
 offset_left = 50.0
@@ -41,56 +65,9 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "CURRENT MARKET"
 
-[node name="banana_spawning2" type="ColorRect" parent="."]
-offset_left = 650.0
-offset_top = 62.0
-offset_right = 1150.0
-offset_bottom = 462.0
-pivot_offset = Vector2(4, 8)
-color = Color(0, 0, 0, 0.42745098)
-
-[node name="Ledger" type="RichTextLabel" parent="banana_spawning2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.0
-offset_top = -174.5
-offset_right = 159.0
-offset_bottom = 174.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="banana_spawning2"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -70.5
-offset_right = 70.5
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "CURRENT MARKET"
-
 [node name="Market_Analysis" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-
-[node name="farmer_square" type="ColorRect" parent="."]
-offset_left = 50.0
-offset_top = 534.0
-offset_right = 1150.0
-offset_bottom = 621.0
-color = Color(1, 1, 1, 0.49803922)
-
-[node name="monkey_square" type="ColorRect" parent="."]
-offset_left = 50.0
-offset_top = 661.0
-offset_right = 1150.0
-offset_bottom = 748.0
-color = Color(1, 1, 1, 0.49803922)
 
 [node name="time_label" type="Label" parent="."]
 anchors_preset = 5
@@ -101,23 +78,15 @@ offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="graph_2d" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 620.0
-offset_top = 60.0
-offset_right = -40.0
-offset_bottom = -333.0
+offset_left = 640.0
+offset_top = 64.0
+offset_right = -48.0
+offset_bottom = -336.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -125,5 +94,51 @@ script = ExtResource("2_iks0y")
 x_max = 1.0
 y_max = 100.0
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="add_farmer" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 552.0
+offset_right = 1144.0
+offset_bottom = 608.0
+
+[node name="subtract_farmer" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 552.0
+offset_right = 1080.0
+offset_bottom = 608.0
+
+[node name="add_monkey" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 672.0
+offset_right = 1144.0
+offset_bottom = 728.0
+
+[node name="subtract_monkey" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 672.0
+offset_right = 1080.0
+offset_bottom = 728.0
+
+[node name="clear_graph" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 472.0
+offset_right = 704.0
+offset_bottom = 536.0
+text = "CLEAR GRAPH"
+
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="timeout" from="Market_Analysis" to="." method="_on_market_analysis_timeout"]
+[connection signal="pressed" from="UI/add_farmer" to="." method="_on_add_farmer_pressed"]
+[connection signal="pressed" from="UI/subtract_farmer" to="." method="_on_subtract_farmer_pressed"]
+[connection signal="pressed" from="UI/add_monkey" to="." method="_on_add_monkey_pressed"]
+[connection signal="pressed" from="UI/clear_graph" to="." method="_on_clear_graph_pressed"]

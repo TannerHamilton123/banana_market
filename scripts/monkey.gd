@@ -4,6 +4,7 @@ var banana_considering
 var price
 var index
 var banana_name
+var banana_path
 var willing_to_buy : int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +28,7 @@ func look_at_market():
 	banana_considering = Global.market.produce[0]
 	banana_name= banana_considering[0]
 	price = banana_considering[1]
+	banana_path = banana_considering[2]
 	
 func demand_algorithm(b_price):
 	willing_to_buy = 100 - b_price
@@ -37,8 +39,11 @@ func demand_algorithm(b_price):
 		buy = false
 		
 func buy_banana():
-	var banana_node = Global.market.get_node(banana_name)
+
+	var banana_node = get_node(banana_path)
+	
 	banana_node.sold = true
 	Global.market.produce.pop_front()
+	banana_node.banana_sold.emit()
 
 	banana_node.queue_free()

@@ -56,4 +56,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_srj6n")
 }
 
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="timeout" from="expiration_date" to="." method="_on_expiration_date_timeout"]
